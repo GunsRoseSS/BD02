@@ -15,8 +15,6 @@ def InsertionSort(A, i):
 
 
 B = [] #de sublijst die gesorteerd wordt
-
-
 def dsort(A, B):
     if len(A) == 0: #als er geen nummers meer zijn die gesorteerd worden, dan return de gesorteerde lijst
         return B
@@ -58,6 +56,25 @@ def LetterSort(s):
         leftover = s[1:len(s)-1] #de rest van de string
         return last + LetterSort(leftover) + first
 
-#print(LetterSort("Markisacunt")) #voorbeeld uitwerking
+#print(LetterSort("zuydhogeschool")) #voorbeeld uitwerking
 
-#Opdracht 3
+#Opdracht 3 Weegschaal
+balance1 = 0
+balance2 = 0
+def WeightSort(A, balance1, balance2):
+    if len(A) == 0:
+        return "Weegschaal 1: " + str(balance1) + " Weegschaal 2: " + str(balance2)
+    else:
+        A.sort()
+        selectedweight = A.pop()
+        if balance1 < balance2:
+            balance1 += selectedweight
+        else:
+            balance2 += selectedweight
+        return WeightSort(A, balance1, balance2)
+
+print(WeightSort([1,5,6,7,3,2,6,6,3,2], balance1, balance2))
+
+#Opdracht 4 Hanoi
+def Hanoi():
+    return
