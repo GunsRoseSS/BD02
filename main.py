@@ -73,7 +73,7 @@ def WeightSort(A, balance1, balance2):
             balance2 += selectedweight
         return WeightSort(A, balance1, balance2)
 
-print(WeightSort([1,5,6,7,3,2,6,6,3,2], balance1, balance2))
+# print(WeightSort([1,5,6,7,3,2,6,6,3,2], balance1, balance2)) #voorbeeld uitwerking
 
 #Opdracht 4 Hanoi
 def Hanoi():
