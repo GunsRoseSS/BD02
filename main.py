@@ -75,6 +75,39 @@ def WeightSort(A, balance1, balance2):
 
 # print(WeightSort([1,5,6,7,3,2,6,6,3,2], balance1, balance2)) #voorbeeld uitwerking
 
-#Opdracht 4 Hanoi
-def Hanoi():
-    return
+# Opdracht 4 Torens van Hanoi
+# Hulp gehad van https://www.geeksforgeeks.org/c-program-for-tower-of-hanoi/
+# En http://pythontutor.com/visualize.html#mode=edit
+def Hanoi(disks, start, aid, destination):
+    if disks == 1:
+        print(start[0], "pin:", start[1], aid[0], "pin:", aid[1],
+              destination[0], "pin:", destination[1])
+        destination[1].append(start[1].pop())
+        print(start[0], "pin:", start[1], aid[0], "pin:", aid[1],
+              destination[0], "pin:", destination[1])
+        return start, aid, destination
+
+    Hanoi(disks - 1, start, destination, aid)
+
+    destination[1].append(start[1].pop())
+    print(start[0], "pin:", start[1], aid[0], "pin:", aid[1],
+          destination[0], "pin:", destination[1])
+
+    return Hanoi(disks - 1, aid, start, destination)
+
+
+# Configuratie,
+# Disks is het aantal schijven op de start paal
+# de lijsten: start, aid en destination representateren de drie palen
+# In de lijsten representateert het meest rechtse getal de onderste schijf en
+# het meest linkse getal de bovenste schijf.
+# Dus van rechts naar links in de lijst is van onder naar boven op de pilaren.
+disks = 5
+start = ["Start", []]
+aid = ["Aid", []]
+destination = ["Destination", []]
+for i in range(disks, 0, -1):
+    start[1].append(i)
+start, aid, destination = Hanoi(disks, start, aid, destination)
+print("End result:", start[0], "pin:", start[1], aid[0], "pin:",
+      aid[1], destination[0], "pin:", destination[1])

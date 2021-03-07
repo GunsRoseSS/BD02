@@ -84,3 +84,15 @@
 #         return Balanceren(lijst, linkerschaal, rechterschaal)
 #         en ga door totdat er geen gewichten meer over zijn.
 
+# 4
+
+# functie Hanoi(aantal schijven, eerste pin, tweede pin, derde pin)
+#     als het aantal schijven een is,
+#         verplaats de schijf van de een van de pinnen naar een andere pin
+#         geef alle drie de pinnen terug
+    
+#     Hanoi(aantal schijven min een, eerste pin, derde pin, tweede pin)
+#     verplaats de schijf van de een van de pinnen naar een andere pin
+
+#     geef terug Hanoi(aantal schijven min een, tweede pin, eerste pin, derde pin)
+#     ga door todat alle schijven zijn gesorteerd
