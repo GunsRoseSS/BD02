@@ -23,29 +23,39 @@
 
 # 1B
 #
-# Dit programma zal de gebruiker toestaan een list van cijfers te sorteren op een divide and conquer manier
+# Dit programma zal de gebruiker toestaan een list van cijfers te sorteren op een divide and conquer manier.
 #
 # functie DivideAndConquer(lijst)
 #     if de lengte van de lijst kleiner dan 2 is,
 #         return de lijst
 #
 #     else
-#         maak twee sublijsten aan. (A en B)
+#         Splits de lijst in twee sublijsten. (A en B)
 #
-#         neem het laatste getal van de lijst
-#         en gebruik deze als pivot.
-
-#         verwijder de pivot uit de lijst.
+#         splits en sorteer deze sublijsten met:
+#         A = DivideAndConquer(A)
+#         B = DivideAndConquer(B)
 #
-#         for ieder nummer in de lijst
-#             if het getal groter is dan de pivot
-#                 zet deze in lijst B
+#         maak een nieuwe lijst aan. (C)
+#         merge deze lijsten nu met:
 #
+#         while de lengte van A > 0 and de lengte van B > 0
+#             if het eerste cijfer van A > het eerste cijfer van B
+#                 zet getal B in lijst C
+#                 en verwijder deze uit B.
 #             else
-#                 zet deze in lijst A
+#                 zet getal A in lijst C
+#                 en verwijder deze uit A.
 #
-#         return DivideAndConquer(A) + de pivot + DivideAndConquer(B)
-#         en laat het proces zich herhalen totdat er geen lijsten van 2 of meer cijfers zijn.
+#         nu een van de lijsten leeg is:
+#
+#         if A is leeg
+#             gooi de rest van A in C
+#         else
+#             gooi de rest van B in C
+#
+#         C is nu de nieuwe gesorteerde en gemergede lijst.
+#         return C
 
 # 2
 #

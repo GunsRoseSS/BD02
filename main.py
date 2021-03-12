@@ -28,23 +28,47 @@ def dsort(A, B):
 # print(dsort([88, 6, 4, 72, 1], B)) #voorbeeld uitwerking
 
 #Opdracht 1B divide and conquer
-def QuickSort(A):
+def Merge(A, B):
+    C = [] #dit wordt de samengevoegde lijst
+
+    #voeg het kleinste getal als eerste in de lijst
+    while len(A) > 0 and len(B) > 0: #totdat een van de lijsten leeg is:
+        if A[0] > B[0]:
+            C.append(B[0]) #het getal uit de lijst B is het kleinst, dus voeg deze toe aan C
+            B.pop(0) #verwijder het getal uit B
+        else: #als dit niet zo is, doe dit voor het getal uit de lijst A
+            C.append(A[0])
+            A.pop(0)
+
+    #nu is er nog één getal over uit de lijsten.
+    if len(A) == 0: #als de lijst A leeg is, dan zitten er nog getallen in lijst B.
+        while len(B) > 0:
+            C.append(B[0])
+            B.pop(0)
+    else: #anders zitten er nog getallen in lijst A.
+        while len(A) > 0:
+            C.append(A[0])
+            A.pop(0)
+
+    #nu alle getallen gesorteerd en gemerged zijn kan de lijst gereturned worden.
+    return C
+
+
+def MergeSort(A):
     if len(A) <= 1: #als de lengte van de lijst kleiner dan 1 is, return dan de lijst
         return A
     else:
-        pivot = A.pop() #verwijder het laatste nummer uit de lijst en maak deze de pivot
+        mergelist1 = A[:int(len(A)/2)] #maak de twee sublijsten
+        mergelist2 = A[int(len(A)/2):]
 
-        list_higher = [] #maakt de lijsten aan
-        list_lower = []
+        mergelist1 = MergeSort(mergelist1) #splits de lijsten verder op op een recursieve manier
+        mergelist2 = MergeSort(mergelist2)
 
-        for number in A:
-            if number > pivot: #als het nummer hoger is dan de pivot, zet deze in de hogere lijst
-                list_higher.append(number)
-            else: #zo niet, zet ze in de lagere lijst (inclusief nummers die gelijk zijn)
-                list_lower.append(number)
-        return QuickSort(list_lower) + [pivot] + QuickSort(list_higher)
+        print("List 1: " + str(mergelist1) + " List 2: " + str(mergelist2))
 
-#print(QuickSort([85,25,84,15,26,37,95,0,34])) #voorbeeld uitwerking
+        return Merge(mergelist1, mergelist2) #voeg de lijsten samen, sorteer deze en return deze
+
+#print(MergeSort([85,25,84,15,26,37,95,0,34])) #voorbeeld uitwerking
 
 #Opdracht 2 string van s letters omdraaien
 def LetterSort(s):
@@ -102,12 +126,13 @@ def Hanoi(disks, start, aid, destination):
 # In de lijsten representateert het meest rechtse getal de onderste schijf en
 # het meest linkse getal de bovenste schijf.
 # Dus van rechts naar links in de lijst is van onder naar boven op de pilaren.
-disks = 5
-start = ["Start", []]
-aid = ["Aid", []]
-destination = ["Destination", []]
-for i in range(disks, 0, -1):
-    start[1].append(i)
-start, aid, destination = Hanoi(disks, start, aid, destination)
-print("End result:", start[0], "pin:", start[1], aid[0], "pin:",
-      aid[1], destination[0], "pin:", destination[1])
+
+# disks = 5
+# start = ["Start", []]
+# aid = ["Aid", []]
+# destination = ["Destination", []]
+# for i in range(disks, 0, -1):
+#     start[1].append(i)
+# start, aid, destination = Hanoi(disks, start, aid, destination)
+# print("End result:", start[0], "pin:", start[1], aid[0], "pin:",
+#       aid[1], destination[0], "pin:", destination[1])
