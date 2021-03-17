@@ -79,9 +79,9 @@ def AITurn():
 
 def printBoard(bord):
     print(str(bord[0]) + "  |  " + str(bord[1]) + "  |  " + str(bord[2]))
-    print("------------------------------------------------")
+    print("--------------------------")
     print(str(bord[3]) + "  |  " + str(bord[4]) + "  |  " + str(bord[5]))
-    print("------------------------------------------------")
+    print("--------------------------")
     print(str(bord[6]) + "  |  " + str(bord[7]) + "  |  " + str(bord[8]))
 
 
@@ -123,6 +123,7 @@ def miniMax(bord, maxing):
         else:
             best = min(statevalues)
         return best
+
 
 def start():
     start = random.randint(0, 1)
