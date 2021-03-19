@@ -62,10 +62,12 @@ def AITurn():
     next = findNextStates(bord, True) #zoek naar de nieuwe states die behaald kunnen worden vanuit de huidige state
     nextvalues = [] #een lijst voor de waarden van de nieuwe states.
     for state in next: #voor iedere state
-        nextvalues.append(miniMax(state, True)) #bereken de waarde van deze state met het minimax algoritme en voeg deze toe aan de lijst van waarden.
+        nextvalues.append(miniMax(state, True, -2, 2)) #bereken de waarde van deze state met het minimax algoritme en voeg deze toe aan de lijst van waarden.
 
     beststate = [] #de best mogelijke state
     bestvalue = 0 #de best mogelijke value
+
+    print(next, nextvalues)
     for i in range(0, len(nextvalues)): #voor iedere value van de nieuwe states
         if nextvalues[i] == 1: #als deze winnend is voor de AI
             beststate = next[i] #dan maak deze de beste state en de beste value.
@@ -83,9 +85,6 @@ def AITurn():
     for i in range(0, len(bord)): #kijk waar het verschil zit tussen de huidige state en de beste state en gebruik dit verschil als zet.
         if bord[i] != beststate[i]:
             zet = i + 1
-
-    print(next)
-    print(nextvalues)
     move(zet, "o") #maak de zet.
 
     win = checkGoalState(bord) #controleer of de Ai gewonnen heeft of gelijk heeft gespeeld.
@@ -139,14 +138,24 @@ def checkGoalState(bord):
 
 
 #het minimax algoritme
-def miniMax(bord, maxing):
+def miniMax(bord, maxing, a, b):
     if checkGoalState(bord) != 5: #als de huidige state een goal state is, return de value van de goalstate
         return checkGoalState(bord)
     else:
         statevalues = [] #de values van de nieuwe states
         states = findNextStates(bord, not maxing) #zoek de nieuwe states
         for state in states: #voor iedere gevonden state
-            statevalues.append(miniMax(state, not maxing)) #zoek de value van de state dmv de volgende states te zoeken totdat deze tegen een goal state op lopen.
+            loop = miniMax(state, not maxing, a, b)
+            statevalues.append(loop) #zoek de value van de state dmv de volgende states te zoeken totdat deze tegen een goal state op lopen.
+
+            if maxing: #als het de beurt van de maximaliserende speler is (en de vorige beurt dus van de minimaliserende speler is)
+                b = min(b, loop) #kijk dan of de beta verhoogd is
+                if b <= a: #en als deze hoger is dan de alpha, break uit de loop (want deze tak wordt nooit gekozen door de speler)
+                    break
+            else: #en doe dit andersom voor de minimaliserende speler
+                a = max(a, loop)
+                if b <= a:
+                    break
 
         if maxing: #als het de beurt van de maximaliserende speler is (en de vorige beurt dus van de minimaliserende speler is)
             best = min(statevalues) #geef dan de laagste waarde van alle state values (omdat dit het beste voor de minimaliserende speler is
