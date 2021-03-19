@@ -187,11 +187,17 @@ def printBoard(bord):
             # En maak van de integer een string.
             placeholder[i] = str(placeholder[i])
 
-    print(placeholder[0] + "  |  " + placeholder[1] + "  |  " + placeholder[2])
-    print("-----------------")
-    print(placeholder[3] + "  |  " + placeholder[4] + "  |  " + placeholder[5])
-    print("-----------------")
-    print(placeholder[6] + "  |  " + placeholder[7] + "  |  " + placeholder[8])
+    print('{:^3}|{:^3}|{:^3}'.format(placeholder[0],
+                                     placeholder[1],
+                                     placeholder[2]))
+    print('{:-^11}'.format('-'))
+    print('{:^3}|{:^3}|{:^3}'.format(placeholder[3],
+                                     placeholder[4],
+                                     placeholder[5]))
+    print('{:-^11}'.format('-'))
+    print('{:^3}|{:^3}|{:^3}'.format(placeholder[6],
+                                     placeholder[7],
+                                     placeholder[8]))
 
 
 def checkGoalState(bord):
@@ -199,40 +205,40 @@ def checkGoalState(bord):
 
     # Kruisjes:
     for i in range(1, 4):
-        if (bord[(i - 1) * 3] == "x" and
+        if ((bord[(i - 1) * 3] == "x" and
                 bord[(i - 1) * 3 + 1] == "x" and
-                bord[(i - 1) * 3 + 2] == "x") or \
-            (bord[0 - 1 + i] == "x" and
+                bord[(i - 1) * 3 + 2] == "x") or
+                (bord[0 - 1 + i] == "x" and
                 bord[3 - 1 + i] == "x" and
-                bord[6 - 1 + i] == "x"):
+                bord[6 - 1 + i] == "x")):
             return -1
 
     # Diagonalen:
-    if (bord[0] == "x" and
+    if ((bord[0] == "x" and
             bord[4] == "x" and
-            bord[8] == "x") or \
-        (bord[2] == "x" and
+            bord[8] == "x") or
+            (bord[2] == "x" and
             bord[4] == "x" and
-            bord[6] == "x"):
+            bord[6] == "x")):
         return -1
 
     # Cirkels:
     for i in range(1, 4):
-        if (bord[(i - 1) * 3] == "o" and
+        if ((bord[(i - 1) * 3] == "o" and
                 bord[(i - 1) * 3 + 1] == "o" and
-                bord[(i - 1) * 3 + 2] == "o") or \
-            (bord[0 - 1 + i] == "o" and
+                bord[(i - 1) * 3 + 2] == "o") or
+                (bord[0 - 1 + i] == "o" and
                 bord[3 - 1 + i] == "o" and
-                bord[6 - 1 + i] == "o"):
+                bord[6 - 1 + i] == "o")):
             return 1
 
     # Diagonalen:
-    if (bord[0] == "o" and
+    if ((bord[0] == "o" and
             bord[4] == "o" and
-            bord[8] == "o") or \
-        (bord[2] == "o" and
+            bord[8] == "o") or
+            (bord[2] == "o" and
             bord[4] == "o" and
-            bord[6] == "o"):
+            bord[6] == "o")):
         return 1
 
     # Controleer of er nog zetten zijn, zo niet, is het gelijkspel.
