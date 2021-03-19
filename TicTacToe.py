@@ -5,7 +5,7 @@ import random
 # Opdracht 2
 # print het bord, er wordt van links naar rechts en van boven naar onderen gewerkt
 bord = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-
+# bord = ["x", 0, "o", "o", "x", 0, 0, 0, "o"]
 
 #vind alle mogelijke states/zetten
 def findNextStates(bord, maxing):
@@ -74,7 +74,8 @@ def AITurn():
 
     if bestvalue != 1: #als er geen winnende state gevonden is
         for i in range(0, len(nextvalues)): #zoek dan naar een state waar er gelijkspel te vinden is.
-            if i == 0:
+            if nextvalues[i] == 0:
+                print("h")
                 beststate = next[i]
                 break
 
@@ -83,6 +84,8 @@ def AITurn():
         if bord[i] != beststate[i]:
             zet = i + 1
 
+    print(next)
+    print(nextvalues)
     move(zet, "o") #maak de zet.
 
     win = checkGoalState(bord) #controleer of de Ai gewonnen heeft of gelijk heeft gespeeld.
@@ -141,15 +144,14 @@ def miniMax(bord, maxing):
         return checkGoalState(bord)
     else:
         statevalues = [] #de values van de nieuwe states
-        states = findNextStates(bord, maxing) #zoek de nieuwe states
+        states = findNextStates(bord, not maxing) #zoek de nieuwe states
         for state in states: #voor iedere gevonden state
             statevalues.append(miniMax(state, not maxing)) #zoek de value van de state dmv de volgende states te zoeken totdat deze tegen een goal state op lopen.
 
         if maxing: #als het de beurt van de maximaliserende speler is (en de vorige beurt dus van de minimaliserende speler is)
-            best = min(statevalues) #geef dan de laagste waarde van alle state values (omdat dit het beste is voor de minimaliserende speler)
+            best = min(statevalues) #geef dan de laagste waarde van alle state values (omdat dit het beste voor de minimaliserende speler is
         else: #en doe dit andersom als het de beurt van de minimaliserende speler is.
             best = max(statevalues)
-
         return best #en return deze value
 
 
