@@ -1,7 +1,12 @@
-# Stap 1: Trigrammen en bigrammen halen uit teksten
-# Zet deze in een tabel voor 6 talen met de kansen die daarbij horen
-# deze tabel ergens opslaan
-# nieuw python bestand, daarin de herkenner
-# de herkenner haalt uit de zin alle bigrammen en trigrammen
-# en vergelijkt deze met de kansen van de talen
-# de hoogste kans is de taal dat het is.
+import json
+
+# laadt de bigrammen en trigrammen in
+with open('Bigrammen.txt', 'r') as f:
+    bigrammen = json.loads(f.read())
+
+with open('Trigrammen.txt', 'w') as g:
+    trigrammen = json.loads(g.read())
+
+# Stap 1: de herkenner haalt uit de zin alle bigrammen en trigrammen
+# Stap 2: en vergelijkt deze met de kansen van de talen
+# Stap 3: de hoogste kans is de taal dat het is.
